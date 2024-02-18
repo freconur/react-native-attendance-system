@@ -1,20 +1,39 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+// import { StatusBar } from 'expo-status-bar';
+import { SafeAreaView, StyleSheet, Text, View , StatusBar} from 'react-native';
+import { RootNavigator } from './navigation';
+import { GlobalContextProvider } from './featues/context';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { useState } from 'react';
+import type {StatusBarStyle} from 'react-native';
+export default function App(): JSX.Element[] | JSX.Element {
 
-export default function App() {
+  const STYLES = ['default', 'dark-content', 'light-content'] as const;
+  const [stylesBar, setStylesBar] = useState<StatusBarStyle>(STYLES[0])
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <GlobalContextProvider>
+      {/* <SafeAreaView>  */}
+      
+        <StatusBar 
+        backgroundColor={'#3e4040'} 
+
+        barStyle={'light-content'}
+        animated={true}
+        />
+        <GestureHandlerRootView style={styles.container}> 
+        {/* <StatusBar backgroundColor="red"/> */}
+
+          <RootNavigator />
+        </GestureHandlerRootView>
+      {/* </SafeAreaView>  */}
+    </GlobalContextProvider>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    
+    // alignContent: 'center',
+    // justifyContent: 'center',
   },
 });
