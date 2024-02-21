@@ -24,7 +24,6 @@ const useRegisterStudents = () => {
     }
   }
   const getGrades = async () => {
-    console.log('userData',userData)
     const docRef = (collection(db, `/intituciones/${userData?.idInstitution}/grades`));
     const q = query(docRef, orderBy("grade"));
     const docSnap = await getDocs(q)
@@ -32,7 +31,6 @@ const useRegisterStudents = () => {
     docSnap.forEach((doc) => {
       grades.push(doc.data())
     })
-    console.log('grades', grades);
     dispatch({ type: AttendanceRegister.GRADES, payload: grades })
   }
 
@@ -47,7 +45,6 @@ const useRegisterStudents = () => {
       // doc.data() is never undefined for query doc snapshots
       sections.push(doc.data())
     });
-    console.log('sections', sections);
     dispatch({ type: AttendanceRegister.SECTIONS, payload: sections })
 
   }

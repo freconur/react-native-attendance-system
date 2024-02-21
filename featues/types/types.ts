@@ -62,7 +62,12 @@ export type Student = {
   isAuthenticated:boolean,
   userData?:UserData,
   justificacionMotivoModal:boolean,
-  justificacionFaltaModal: boolean
+  justificacionFaltaModal: boolean,
+  loadingConfirmationJustification:boolean,
+  studentDataConfirmation:JustificacionStudent,
+}
+export interface JustificationValue {
+  justification: string
 }
 export interface DetailsPerDayOfStudent {
   day: string,
@@ -95,6 +100,7 @@ export type AttendanceAction =
   | { type: AttendanceRegister.SHOW_JUSTIFICACION_MOTIVO; payload: JustificacionStudent }
   | { type: AttendanceRegister.SHOW_JUSTIFICACION_FALTA_MODAL; payload: boolean }
   | { type: AttendanceRegister.SHOW_JUSTIFICACION_FALTA_CONFIRMATION_MODAL; payload: boolean }
+  | { type: AttendanceRegister.LOADING_CONFIRMATION_JUSTIFICATION; payload: boolean }
 export type AuthenticationFormSignIn = {
   email: string,
   password: string

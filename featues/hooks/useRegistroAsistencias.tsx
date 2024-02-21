@@ -1,5 +1,5 @@
 import { collection, doc, getDoc, getDocs, getFirestore, orderBy, query, setDoc, where } from 'firebase/firestore'
-import { Grades, JustificacionStudent, Section, StudentData } from '../types/types'
+import { Grades, JustificacionStudent, JustificationValue, Section, StudentData } from '../types/types'
 import { AttendanceRegister } from '../actions/actionAttendance'
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { useGlobalContext, useGlobalContextDispatch } from '../context';
@@ -38,6 +38,25 @@ const { userData } = useGlobalContext()
     }
     return studentsArray
   }
+  // const showJustificationMotivoModal = (value:boolean) => {
+  //   dispatch({type:AttendanceRegister.SHOW_JUSTIFICATION_MOTIVO, payload:!value})
+  // }
+  const loadingConfirmationJustification = (value:boolean) => {
+    dispatch({type:AttendanceRegister.LOADING_CONFIRMATION_JUSTIFICATION, payload:value})
+  }
+  const justificarFalta = async (id: string, date: string, justication: string) => {
+    dispatch({type:AttendanceRegister.LOADING_CONFIRMATION_JUSTIFICATION, payload:true})
+
+    console.log('data',{id:id, date:date, justication:justication})
+    const attendanceRef = doc(db, `/intituciones/${userData?.idInstitution}/attendance-student/${id}/${currentYear()}/${currentMonth()}/${currentMonth()}/${date}`);
+    //deberia crear un modal con campos para poner un motivo de la falta 
+    await setDoc(attendanceRef, { arrivalTime: "justificado", justification: true, justificationMotive: justication })
+    .then(response => {
+    dispatch({type:AttendanceRegister.LOADING_CONFIRMATION_JUSTIFICATION, payload:false})
+    dispatch({ type: AttendanceRegister.SHOW_JUSTIFICACION_FALTA_MODAL, payload: false})
+
+    });
+  }
   const justificacionInfoByStudent = async (id: string, date: string) => {
     const attendanceRef = doc(db, `/intituciones/${userData?.idInstitution}/attendance-student/${id}/${currentYear()}/${currentMonth()}/${currentMonth()}/${date}`);
     const docSnap = await getDoc(attendanceRef);
@@ -46,10 +65,10 @@ const { userData } = useGlobalContext()
     dispatch({ type: AttendanceRegister.SHOW_JUSTIFICACION_MOTIVO, payload: rta })
   }
   const showJustificaconFaltaModal = (value: boolean) => {
-    dispatch({ type: AttendanceRegister.SHOW_JUSTIFICACION_FALTA_MODAL, payload: value })
+    dispatch({ type: AttendanceRegister.SHOW_JUSTIFICACION_FALTA_MODAL, payload: !value })
   }
   const showJustificacionMotivo = (value: boolean) => {
-    dispatch({ type: AttendanceRegister.SHOW_JUSTIFICACION_MOTIVO_MODAL, payload: value })
+    dispatch({ type: AttendanceRegister.SHOW_JUSTIFICACION_MOTIVO_MODAL, payload: !value })
   }
   const filterRegisterByGradeAndSection = async (grade: string, section: string, date: string) => {
     console.log({'grade':grade, 'section':section, 'date':date} )
@@ -77,7 +96,7 @@ const { userData } = useGlobalContext()
 
 
 
-  return { filterRegisterByGradeAndSection, showJustificacionMotivo, justificacionInfoByStudent, showJustificaconFaltaModal }
+  return { filterRegisterByGradeAndSection, showJustificacionMotivo, justificacionInfoByStudent, showJustificaconFaltaModal, justificarFalta, loadingConfirmationJustification}
 }
 
 export default useRegistroAsistencias

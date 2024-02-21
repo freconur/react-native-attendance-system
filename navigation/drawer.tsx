@@ -92,7 +92,6 @@ const MenuItems = ({ navigation }: Props) => {
 
   const { userData } = useGlobalContext()
   const { logout } = useAuthentication()
-  console.log('userData', userData)
   return (
     <DrawerContentScrollView style={styles.container}>
       <View style={styles.infoUserContainer}>
@@ -137,7 +136,7 @@ const MenuItems = ({ navigation }: Props) => {
               onPress={() => navigation.navigate('Registros de asistencia')}
               style={styles.button}
             >
-              <Text style={styles.textButton}>Registros</Text>
+              <Text style={styles.textButton}>Registros de asistencias</Text>
             </Pressable>
 
             <Pressable

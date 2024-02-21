@@ -22,7 +22,10 @@ const initialState: Student = {
   token:{} ,
   isAuthenticated:false,
   userData:{} ,
-  justificacionMotivoModal:false
+  justificacionMotivoModal:false,
+  loadingConfirmationJustification:false,
+  justificacionFaltaModal:false,
+  studentDataConfirmation:{}
 }
 
 export const GlobalContext = createContext<[Student, Dispatch<AttendanceAction>]>([initialState, () => { }])

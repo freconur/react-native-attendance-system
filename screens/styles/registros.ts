@@ -7,6 +7,22 @@ export const styles = StyleSheet.create({
   //   alignItems:"center",
   //   backgroundColor:"#67badf"
   // },
+  faltaContainer: {
+    flexDirection:'row',
+    gap:2,
+    justifyContent:"center",
+    alignItems:"center",
+    // backgroundColor:"blue",
+    marginRight:2
+  },
+  jota:{
+    padding:2,
+    backgroundColor:"#ffed00",
+    height:20,
+    width:20,
+    borderRadius:5,
+    textAlign:"center",
+  },
   ingresoText:{
     fontSize:11,
     textAlign:"center",
@@ -25,7 +41,7 @@ export const styles = StyleSheet.create({
   textCardName:{
     fontSize:11,
     color:"#a3b1b4",
-    width:"35%",
+    width:"55%",
     textTransform:"uppercase"
   },
   textCardLastname:{
@@ -50,7 +66,7 @@ export const styles = StyleSheet.create({
     lineHeight:40
   },
   dni:{
-    width:"18%",
+    width:"20%",
     textAlign:"center",
     textTransform:"uppercase",
     fontSize:11,
@@ -58,14 +74,14 @@ export const styles = StyleSheet.create({
     // backgroundColor:"red"
   },
   apellidos:{
-    width:"35%",
+    width:"40%",
     textAlign:"center",
     textTransform:"uppercase",
     fontSize:11,
     lineHeight:40
   },
   ingreso:{
-    width:"20%",
+    width:"40%",
     textAlign:"center",
     textTransform:"uppercase",
     fontSize:11,
@@ -135,7 +151,7 @@ export const styles = StyleSheet.create({
   },
   textCardAttendance:{
     fontSize: 15,
-    width: "100%",
+    // width: 200,
     textTransform: "uppercase",
     color:"green"
   },
