@@ -1,6 +1,6 @@
 import { View, Text, StyleSheet, TextInput, Button, ScrollView, ActivityIndicator } from 'react-native'
 import { Image } from 'expo-image';
-import React, { useEffect, useState } from 'react'
+import React, { createRef, useEffect, useRef, useState } from 'react'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 import { useAsistencia } from '../featues/hooks/useAsistencia'
 import { useGlobalContext, useGlobalContextDispatch } from '../featues/context'
@@ -14,6 +14,7 @@ const Asistencia = () => {
   const { studentsData, loaderAsistencia } = useGlobalContext()
   const [showScanner, setShowScanner] = useState(false)
   const [scanned, setScanned] = useState(false);
+  const focusRef = createRef<any>()
   const [hasPermission, setHasPermission] = useState<any>(null);
   const handleShowScan = () => {
     setShowScanner(!showScanner)
@@ -36,12 +37,17 @@ const Asistencia = () => {
     };
     getBarCodeScannerPermissions();
   }, []);
-  console.log('loaderAsistencia',loaderAsistencia)
+  useEffect(() => {
+    if (focusRef.current) {
+      focusRef.current.focus();
+    }
+  }, [])
   return (
     <View style={styles.container}>
       {/* <Text>Asistencias</Text> */}
       <View style={styles.barcodeInputContainer}>
         <TextInput
+          ref={focusRef}
           value={studenCode}
           style={styles.input}
           placeholder='codigo de alumno'
@@ -121,9 +127,9 @@ const Asistencia = () => {
   )
 }
 const styles = StyleSheet.create({
-  loader:{
-    textAlign:"center",
-    color:"#969696"
+  loader: {
+    textAlign: "center",
+    color: "#969696"
   },
   pictureProfile: {
     fontSize: 80,

@@ -32,9 +32,7 @@ const ResumeAsistenciaEstudiante = ({ navigation }: Props) => {
   }, [studentDetails.name])
 
   console.log('arrivalTimeFromStudent',resumeAttendanceStudent)
-  // console.log('date', resumeAttendanceStudent[1].date)
-  // console.log('asistencia', resumeAttendanceStudent[0].attendance)
-  // console.log('dia', resumeAttendanceStudent[0].day)
+
   return (
     <SafeAreaView style={styles.container}>
       <View>

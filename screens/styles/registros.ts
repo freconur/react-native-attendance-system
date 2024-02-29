@@ -26,7 +26,12 @@ export const styles = StyleSheet.create({
   ingresoText:{
     fontSize:11,
     textAlign:"center",
-    // marginLeft:20
+    color:"green"
+  },
+  tardanzaText:{
+    fontSize:11,
+    textAlign:"center",
+    color:"red"
   },
   textCardOrder:{
     fontSize:11,

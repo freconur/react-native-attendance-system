@@ -34,14 +34,12 @@ const { userData } = useGlobalContext()
       if (doc.data().justification) {
         arrivalTimeFromStudent.push(getDayFromDate(new Date(`${currentYear()}-${monthToANumber(month)}-${doc.id} 10:34:23`)))
         // arrivalTimeFromStudent.push(getDayFromDateFalta())
-
       } else if (doc.data().falta) {
         console.log('month', month)
         arrivalTimeFromStudent.push(getDayFromDateFalta(new Date(`${currentYear()}-${monthToANumber(month)}-${doc.id} 10:34:23`)))
         // arrivalTimeFromStudent.push(getDayFromDateFalta(new Date("2023-12-26 10:34:23")))
       } else {
         arrivalTimeFromStudent.push(hoursUnixDateForDetailStudent(doc.data().arrivalTime))
-
       }
     });
     // if (arrivalTimeFromStudent) {

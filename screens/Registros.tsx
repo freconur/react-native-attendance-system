@@ -46,7 +46,7 @@ const Registros = ({ navigation }: Props) => {
         </View>
       )
     } else {
-      return <View><Text style={styles.ingresoText}>{value}</Text></View>
+      return <View><Text style={attendanceState(value)? styles.tardanzaText : styles.ingresoText}>{value}</Text></View>
     }
   }
   const showMode = (modeToDshow: string) => {
